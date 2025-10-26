@@ -1,9 +1,8 @@
 [workspace]
 members = [
-  "programs/experimental-preflight-sigcheck",
+  "programs/*",
 ]
 exclude = ["sigcore"]
-default-members = ["programs/experimental-preflight-sigcheck"]
 resolver = "2"
 
 [profile.release]

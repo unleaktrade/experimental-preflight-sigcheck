@@ -1,3 +1,7 @@
+[workspace]
+members = ["programs/experimental-preflight-sigcheck"]
+exclude = ["sigcore"]
+
 [toolchain]
 package_manager = "yarn"
 

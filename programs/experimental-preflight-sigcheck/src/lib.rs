@@ -56,20 +56,21 @@ pub mod experimental_preflight_sigcheck {
         require!(sig_ix_index == 0xFFFF, ErrorCode::InvalidOffset);
         require!(pubkey_ix_index == 0xFFFF, ErrorCode::InvalidOffset);
         require!(msg_ix_index == 0xFFFF, ErrorCode::InvalidOffset);
-
-        // Enforce canonical single-sig layout used by web3 helper
-        require!(sig_offset == 48 || sig_offset == 16, ErrorCode::InvalidOffset);
-        require!(pubkey_offset == 16 || pubkey_offset == 80, ErrorCode::InvalidOffset);
-        require!(msg_offset == 112, ErrorCode::InvalidOffset);
         require!(msg_size == 32, ErrorCode::InvalidMessageSize);
 
-        // Bounds checks
-        require!(data.len() >= sig_offset + 64, ErrorCode::InvalidEd25519Data);
+        // Bounds
         require!(
-            data.len() >= pubkey_offset + 32,
+            data.len().saturating_sub(sig_offset) >= 64,
             ErrorCode::InvalidEd25519Data
         );
-        require!(data.len() >= msg_offset + 32, ErrorCode::InvalidEd25519Data);
+        require!(
+            data.len().saturating_sub(pubkey_offset) >= 32,
+            ErrorCode::InvalidEd25519Data
+        );
+        require!(
+            data.len().saturating_sub(msg_offset) >= 32,
+            ErrorCode::InvalidEd25519Data
+        );
 
         // Authorized signer check
         let pubkey_bytes = &data[pubkey_offset..pubkey_offset + 32];

@@ -58,8 +58,8 @@ pub mod experimental_preflight_sigcheck {
         require!(msg_ix_index == 0xFFFF, ErrorCode::InvalidOffset);
 
         // Enforce canonical single-sig layout used by web3 helper
-        require!(sig_offset == 48, ErrorCode::InvalidOffset);
-        require!(pubkey_offset == 16, ErrorCode::InvalidOffset);
+        require!(sig_offset == 48 || sig_offset == 16, ErrorCode::InvalidOffset);
+        require!(pubkey_offset == 16 || pubkey_offset == 80, ErrorCode::InvalidOffset);
         require!(msg_offset == 112, ErrorCode::InvalidOffset);
         require!(msg_size == 32, ErrorCode::InvalidMessageSize);
 

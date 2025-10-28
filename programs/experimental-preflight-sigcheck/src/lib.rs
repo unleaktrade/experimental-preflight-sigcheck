@@ -7,7 +7,7 @@ use anchor_lang::solana_program::sysvar::instructions::{
 declare_id!("9regB6ad87mGXsskBEhkP9eXNPR1CGMmkFaGynLr3t8S");
 
 // Hardcoded authorized signer (your base58 key)
-const AUTHORIZED_SIGNER: Pubkey = pubkey!("84SBbUsyV3BJLdytTswHuAgcwdUrZcACCy38EA1DanmS");
+const AUTHORIZED_SIGNER: Pubkey = pubkey!("x4EJH892FzJt7wmLaiD26dh1kkkwqqzggNcKMp2uXJQ");
 
 #[program]
 pub mod experimental_preflight_sigcheck {
